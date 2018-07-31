@@ -16,9 +16,11 @@ onready var submit_btn = get_node("vbox/submit_btn")
 onready var dest_folder_dialog = get_node("dest_folder_dialog")
 onready var dest_path = get_node("vbox/dest_hbox/dest_path")
 onready var dest_select_btn = get_node("vbox/dest_hbox/dest_select_btn")
-onready var gene_scn_CheckBox = get_node("vbox/gene_scn_CheckBox")
+onready var gen_scn_CheckBox = get_node("vbox/options_hbox/gen_scn_CheckBox")
+onready var remove_transparent_CheckBox = get_node("vbox/options_hbox/remove_transparent_CheckBox")
 
-signal tileset_data_provided( texture_path, tile_size, offset, spacing, destination, scene_only )
+signal tileset_data_provided( texture_path, tile_size, offset, spacing, destination,
+	scene_only, remove_transparent )
 
 func _ready():
 	ss_select_btn.connect( "pressed", ss_file_dialog, "popup_centered" )
@@ -32,5 +34,6 @@ func _on_submit_btn_pressed():
 		Vector2( x_ts_spin.get_value(), y_ts_spin.get_value() ),
 		Vector2( x_o_spin.get_value(), y_o_spin.get_value() ),
 		Vector2( x_s_spin.get_value(), y_s_spin.get_value() ),
-		dest_path.get_text(), get_node("vbox/gene_scn_CheckBox").is_pressed() )
+		dest_path.get_text(), gen_scn_CheckBox.is_pressed(),
+		 remove_transparent_CheckBox.is_pressed())
 	hide()
